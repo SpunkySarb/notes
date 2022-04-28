@@ -26,14 +26,14 @@ const Home = () => {
     }, []);
 
 
-   
+    
   
     const addTaskHandler = (text) => {
 
         if (text.replace(/\s+/g, "").length > 0) {
             
 
-            axios.post('/addNote', { text: text }).then(response => { updateTasks(prevState => { return [...prevState, { id: response.data.id, notes: text }] }); });
+            axios.post('/addNote', { text: text }).then(response => { updateTasks(prevState => { return [...prevState, { id: response.data.id, notes: response.data.notes }] }); });
 
         }
        

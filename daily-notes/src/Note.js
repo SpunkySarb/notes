@@ -32,15 +32,15 @@ const Note = (props) => {
 
         <div onClick={taskStatusHandler} className="w3-container scale-in-center  w3-large w3-border-bottom w3-margin " >
 
-            {!isComplete.status && <span className={isComplete.color}>  <span className="w3-wide"> {props.number}</span> {".  "}
+            {!isComplete.status && <span className={isComplete.color}>  <span className="w3-wide fa fa-circle "> </span> {"  "}
                 {props.text}
                 {" "}{" "}
             </span>}
 
-            {isComplete.status && <strike className={isComplete.color}>  <span className="w3-wide"> {props.number}</span> {".  "}
+            {isComplete.status && <> <span className="w3-wide fa fa-check-circle"> </span> <strike className={isComplete.color}>   {"  "}
                 {props.text}
                 {" "}{" "}
-            </strike>}
+            </strike></>}
 
         </div>
 
