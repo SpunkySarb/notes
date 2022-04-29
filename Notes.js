@@ -13,6 +13,15 @@ const Notes = db.define('Notes', {
         primaryKey: true
 
     },
+    username: {
+
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false
+    }
+    
+    
+    ,
     notes: {
         type: DataTypes.STRING,
         allowNull: false
@@ -22,7 +31,8 @@ const Notes = db.define('Notes', {
       type:  DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
-}
+    },
+  
 
 
 

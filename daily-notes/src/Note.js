@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 import React from 'react';
 const Note = (props) => {
 
     const [isComplete, completeStatus] = useState({status: false, color: ""});
 
-
+    const username = useSelector((state) => state.username);
 
     useEffect(() => {
 
-        axios.post('/getNoteStatus', { id: props.number }).then(result => { completeStatus(result.data ? { status: true, color: "w3-text-red" } : { status: false, color: "" }); console.log(result.data); });
+        axios.post('/getNoteStatus', { id: props.number, username: username }).then(result => { completeStatus(result.data ? { status: true, color: "w3-text-red" } : { status: false, color: "" });  });
 
 
     },
@@ -23,7 +23,7 @@ const Note = (props) => {
 
        completeStatus(!isComplete.status ? { status: true, color: "w3-text-red" } : { status: false, color: "" });
 
-       axios.post('/completeStatus', { id: props.number }).then((status) => {   });
+       axios.post('/completeStatus', { id: props.number, username: username }).then((status) => {   });
        
     }
 

@@ -2,9 +2,10 @@ import Note from './Note';
 import Form from './Form';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 const Home = () => {
 
-
+    const username = useSelector((state) => state.username);
     const [addTaskDisplayStatus, addTaskDisplay] = useState(false);
 
     const [tasks, updateTasks] = useState([]);
@@ -16,7 +17,7 @@ const Home = () => {
 
     useEffect(() => {
 
-        axios.get('/getNotes').then(response => {
+        axios.post('/getNotes', {username: username}).then(response => {
 
 
             updateTasks(response.data);
@@ -33,7 +34,7 @@ const Home = () => {
         if (text.replace(/\s+/g, "").length > 0) {
             
 
-            axios.post('/addNote', { text: text }).then(response => { updateTasks(prevState => { return [...prevState, { id: response.data.id, notes: response.data.notes }] }); });
+            axios.post('/addNote', { text: text, username: username }).then(response => { updateTasks(prevState => { return [...prevState, { id: response.data.id, notes: response.data.notes }] }); });
 
         }
        
@@ -49,7 +50,7 @@ const Home = () => {
 
         <br />
 
-        <div onClick={() => { updateTasks([]); axios.get('/endTheDay')} } className="w3-button w3-red w3-round w3-hover-black w3-badge">END DAY</div>
+        <div onClick={() => { updateTasks([]); axios.post('/endTheDay', {username: username })} } className="w3-button w3-red w3-round w3-hover-black w3-badge">END DAY</div>
 
         <br />
 
@@ -69,7 +70,7 @@ const Home = () => {
 
 
 
-        {!addTaskDisplayStatus && <div onClick={ addTaskDisplayHandler} style={{ width: '100px', height: '100px', marginRight: '10px', marginBottom: '10px' }} className=" roll-in-left  w3-card-4 w3-center w3-badge w3-display-bottomright w3-jumbo w3-black">+</div>}
+        {!addTaskDisplayStatus && <div onClick={ addTaskDisplayHandler} style={{position:'fixed',  width: '100px', height: '100px', marginRight: '10px', marginBottom: '10px' }} className=" roll-in-left  w3-card-4 w3-center w3-badge w3-display-bottomright w3-jumbo w3-black">+</div>}
        
         
         

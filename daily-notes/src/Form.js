@@ -8,7 +8,7 @@ const Form = (props) => {
     const textRef = useRef();
 
 
-    return (<div style={{minWidth: window.innerWidth}} className=" w3-container w3-card-4 w3-black w3-display-bottommiddle">
+    return (<div style={{position:'fixed' , minWidth: window.innerWidth}} className=" w3-container w3-card-4 w3-black w3-display-bottommiddle">
         <br />
         <input ref={ textRef} className="w3-input  w3-center w3-large w3-white" type="text" placeholder="Write Task..." />
         <br/>
