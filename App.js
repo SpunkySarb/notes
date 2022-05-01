@@ -13,29 +13,57 @@ app.use(express.json());
 
 app.post('/auth', (req, res, next) => {
 
-    Users.findAll().then((result) => {
+    Users.findOne({ where: {username: req.body.username, password: req.body.password}}).then((result) => {
 
-        for (let i = 0; i < result.length; i++) {
-
-            if (req.body.username === result[i].username && req.body.password === result[i].password) {
-
-                res.send({authorized: true});
-
-            } 
-
-
+        if (result == null) {
+            res.send({ authorized: false });
+        } else {
+            res.send({ authorized: true });
         }
 
-
+       
     });
 
 
 });
 
 
-app.post('/getNotes', (req, res, next) => {
+app.post('/register', (req, res, next) => {
+
+    try {
+        Users.findOne({ where: { username: req.body.username } }).then(result => {
+
+
+            if (result == null) {
+                Users.create({ username: req.body.username, password: req.body.password }).then(res.send({ userCreated: true }));
+
+            } else {
+
+                res.send({ userCreated: false });
+
+
+
+            }
+
+
+        });
+
+    } catch (err) {
+        console.log(err.message);
+    }
    
-    Notes.findAll({ where: { username: req.body.username } }).then((data) => { res.send(data); console.log(data); });
+
+
+});
+
+app.post('/getNotes', (req, res, next) => {
+    try {
+        Notes.findAll({ where: { username: req.body.username } }).then((data) => { res.send(data); console.log("THIS IS THE DATA",data); });
+        
+    } catch (err) {
+        console.log(err.message);
+    }
+   
 });
 
 
@@ -46,6 +74,22 @@ app.post('/addNote', (req, res, next) => {
 
 
 });
+
+
+app.post('/deleteNote',  (req, res, next) => {
+
+    Notes.destroy({ where: { username: req.body.username, id: req.body.id } }).then((data) => { res.send({nothing: "nada"}); console.log(" this is data",data); });
+});
+
+app.post('/updateNote',  (req, res, next) => {
+    console.log(req.body.notes)
+    Notes.update({ notes: req.body.notes }, { where: { username: req.body.username, id: req.body.id } }).then(data => { res.send(data); console.log(" this is data", data); });
+
+   
+});
+
+
+
 
 
 app.post('/endTheDay', (req, res, next) => {
@@ -64,9 +108,12 @@ app.post('/endTheDay', (req, res, next) => {
 
 app.post('/completeStatus', (req, res, next) => {
 
-    Notes.findOne({ where: {id: req.body.id, username: req.body.username} }).then((result) => { Notes.update({ iscomplete: !result.iscomplete }, { where: { id: req.body.id, username: req.body.username } }); console.log(result); });
-    
+    try {
+        Notes.findOne({ where: { id: req.body.id, username: req.body.username } }).then((result) => { Notes.update({ iscomplete: !result.iscomplete }, { where: { id: req.body.id, username: req.body.username } }); console.log(result); });
 
+    } catch (err) {
+        res.redirect('/');
+    }
 
 });
 

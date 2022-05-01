@@ -4,7 +4,9 @@ import Home from './Home';
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import {loginData } from './Store';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import './App.css';
+import React from 'react';
 
 
 function App() {

@@ -6,7 +6,9 @@ const loginSlice = createSlice({
     name: 'loginInfo',
     initialState: {
         username: "",
-        password: ""
+        password: "",
+      tasksState: []
+       
     },
     reducers: {
 
@@ -15,13 +17,15 @@ const loginSlice = createSlice({
             state.username = action.payload.username;
             state.password = action.payload.password;
 
-            
+        },
 
+       
+
+        updateTasks(state, action) {
+
+            state.tasksState = [ ...action.payload.data]
 
         }
-
-      
-
 
 
     }

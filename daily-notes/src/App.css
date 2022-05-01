@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Dancing+Script&family=Hachi+Maru+Pop&family=Homemade+Apple&family=Josefin+Slab:wght@200&family=Kaushan+Script&family=Mali:wght@300&family=Marck+Script&family=Nanum+Brush+Script&family=Pacifico&family=Press+Start+2P&family=Puppies+Play&family=Sacramento&family=Satisfy&family=Staatliches&family=Sue+Ellen+Francisco&family=Supermercado+One&family=Tangerine:wght@700&display=swap');
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.dancingFont {
+    font-family: 'Dancing Script', cursive;
 }

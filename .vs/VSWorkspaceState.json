@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\daily-notes",
+    "\\daily-notes\\public",
+    "\\daily-notes\\src"
   ],
-  "SelectedNode": "\\App.js",
+  "SelectedNode": "\\daily-notes\\src\\EditModal.js",
   "PreviewInSolutionExplorer": false
 }
