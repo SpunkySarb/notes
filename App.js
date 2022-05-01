@@ -97,11 +97,11 @@ app.use('/', express.static(path.join(__dirname, 'daily-notes', 'build')));
 
 
 
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
 
 
 
-
+// d
 
 
 
