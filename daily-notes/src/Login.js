@@ -15,6 +15,9 @@ const Login = () => {
     const [userCreated, setUserCreated] = useState(false);
     const [userExists, userExistStatus] = useState(false);
 
+    const [createAccountMsg, setCreateAccountMsg] = useState(<></>);
+
+
     const usernameRef = useRef();
     const passwordRef = useRef();
 
@@ -61,7 +64,7 @@ const Login = () => {
     //creating user
     const createUser = () => {
         if (!usernameLengthStatus && passValid && usernameRef.current.value != "" && passwordRef.current.value != "") {
-
+            setCreateAccountMsg(<></>);
             localStorage.setItem('todoUserName', usernameRef.current.value);
             localStorage.setItem('todoPassword', passwordRef.current.value);
 
@@ -70,7 +73,7 @@ const Login = () => {
             //authenticate here
             axios.post('/register', { username: usernameRef.current.value, password: passwordRef.current.value }).then((response) => {
 
-                 
+
                 if (response.data.userCreated) {
                     setUserCreated(true);
                     updateCredentialsValidity(true);
@@ -86,6 +89,8 @@ const Login = () => {
             });
 
 
+        } else {
+            setCreateAccountMsg(<div className="w3-wide w3-text-red w3-center w3-margin rotate-hor-center">Please fill the username and choose the password and then click create account...</div>);
         }
 
     }
@@ -208,7 +213,8 @@ const Login = () => {
         <br /><br /><br />
 
         {!credentialsValidity && <div className="w3-wide w3-text-red w3-center rotate-hor-center">invalid password or username. <br/> if you are a new user the try creating account.</div>}
-        {userExists && <div className="w3-wide w3-text-red w3-center rotate-hor-center">Username Already exists!!!<br/> try another...</div>}
+        {userExists && <div className="w3-wide w3-text-red w3-center rotate-hor-center">Username Already exists!!!<br /> try another...</div>}
+        {createAccountMsg}
         {userCreated && <div className="w3-wide w3-text-green w3-center rotate-hor-center">Congratulations!<br/> You are Registered Now...<br/><br/>Try Logging In Now...</div>}
         <br /><br /><br />
 
