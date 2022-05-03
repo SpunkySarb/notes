@@ -138,6 +138,13 @@ app.use('/home', (req, res, next) => {
     res.redirect('/');
 });
 
+app.use('/tutorial', (req, res, next) => {
+
+    res.redirect('/');
+});
+
+
+
 app.use('/', express.static(path.join(__dirname, 'daily-notes', 'build')));
 
 
