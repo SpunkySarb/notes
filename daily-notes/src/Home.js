@@ -59,7 +59,21 @@ const Home = () => {
         return <Navigate  to="/"  />
     }
     
+    const endTheDay = () => {
 
+        axios.post('/endTheDay', { username: username }).then(response => {
+
+
+            axios.post('/getNotes', { username: username }).then(response => {
+
+                taskDispatcher(loginData.updateTasks({ data: [...response.data] }));
+
+
+            });
+        });
+
+
+    }
 
     return (<><div className="w3-center  w3-container w3-black w3-wide w3-xlarge">
         Daily ToDo
@@ -67,7 +81,7 @@ const Home = () => {
 
         <br />
         <div className="w3-bar">
-        <div onClick={() => { taskDispatcher(loginData.updateTasks([])); axios.post('/endTheDay', {username: username })} } className="w3-button w3-bar-item w3-black w3-card-4 w3-round w3-hover-black w3-badge">END DAY</div>
+            <div onClick={ endTheDay} className="w3-button w3-bar-item w3-black w3-card-4 w3-round w3-hover-black w3-badge">END DAY</div>
             <div onClick={() => { localStorage.setItem('todoUserName', ""); localStorage.setItem('todoPassword', ""); logoutStatus(true); }} className="w3-button w3-bar-item w3-right w3-black w3-xlarge w3-card-4 w3-round w3-hover-black fa fa-sign-out w3-badge"></div></div>
         <br />
 

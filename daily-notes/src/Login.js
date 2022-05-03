@@ -45,7 +45,8 @@ const Login = () => {
                 } else {
 
                     updateAuthStatus(false);
-
+                    setUserCreated(false);
+                    userExistStatus(false);
                     updateCredentialsValidity(false);
                 }
 
@@ -69,14 +70,15 @@ const Login = () => {
             //authenticate here
             axios.post('/register', { username: usernameRef.current.value, password: passwordRef.current.value }).then((response) => {
 
-                
+                 
                 if (response.data.userCreated) {
                     setUserCreated(true);
+                    updateCredentialsValidity(true);
                     userExistStatus(false);
                 } else {
                     setUserCreated(false);
                     userExistStatus(true);
-
+                    updateCredentialsValidity(true);
 
                 }
 
@@ -185,9 +187,20 @@ const Login = () => {
 
     if (authStatus) {
 
-        return <Navigate to="/home" />;
+        if (localStorage.getItem('tutorialView') == 'true') {
+            return <Navigate to="/home" />;
+        } else {
+            return <Navigate to="/tutorial" />;
+        }
 
-    }
+
+        
+
+
+        
+
+    }  
+    
 
     return (<div style={{ backgroundImage: `url(${image})`, minWidth: window.innerWidth, minHeight: window.innerHeight, backgroundSize: 'cover', backgroundRepeat: "no-repeat"}}>
         <div className="w3-black w3-xlarge w3-wide w3-center">Daily ToDo</div>

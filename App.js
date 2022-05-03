@@ -95,7 +95,7 @@ app.post('/updateNote',  (req, res, next) => {
 app.post('/endTheDay', (req, res, next) => {
 
     try {
-        Notes.destroy({ where: { username: req.body.username } });
+        Notes.destroy({ where: { username: req.body.username } }).then(res.send({destroyed:true}));
         Notes.sync();
     } catch (err) {
         console.log(err.message);
