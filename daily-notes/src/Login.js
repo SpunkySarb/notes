@@ -46,7 +46,7 @@ const Login = () => {
                     updateAuthStatus(true);
 
                 } else {
-
+                    setCreateAccountMsg(<></>);
                     updateAuthStatus(false);
                     setUserCreated(false);
                     userExistStatus(false);
@@ -64,7 +64,7 @@ const Login = () => {
     //creating user
     const createUser = () => {
         if (!usernameLengthStatus && passValid && usernameRef.current.value != "" && passwordRef.current.value != "") {
-            setCreateAccountMsg(<></>);
+            
             localStorage.setItem('todoUserName', usernameRef.current.value);
             localStorage.setItem('todoPassword', passwordRef.current.value);
 
@@ -75,10 +75,12 @@ const Login = () => {
 
 
                 if (response.data.userCreated) {
+                    setCreateAccountMsg(<></>);
                     setUserCreated(true);
                     updateCredentialsValidity(true);
                     userExistStatus(false);
                 } else {
+                    setCreateAccountMsg(<></>);
                     setUserCreated(false);
                     userExistStatus(true);
                     updateCredentialsValidity(true);
