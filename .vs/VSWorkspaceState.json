@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\daily-notes",
     "\\daily-notes\\public",
     "\\daily-notes\\src"
   ],
-  "SelectedNode": "\\Notes.js",
+  "SelectedNode": "\\daily-notes\\src",
   "PreviewInSolutionExplorer": false
 }

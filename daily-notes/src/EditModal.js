@@ -63,8 +63,10 @@ const EditModal = (props) => {
             <br />
             <textarea ref={textAreaRef } className="w3-input w3-xlarge dancingFont" type='textarea' defaultValue={ props.text}/>
             <br />
-            <div onClick={() => { updateNote(); props.close(); }  } className="w3-button w3-white fa fa-save w3-xxlarge w3-round-large"></div>
-            <div onClick={() => { deleteNote(); props.close(); } } className="w3-button w3-red w3-right fa fa-trash w3-xxlarge w3-round-large"></div>
+            <div onClick={() => { updateNote(); props.close(); }} className="w3-button w3-white w3-right fa  fa-save w3-xxlarge w3-round-large"></div>
+            <div onClick={() => { deleteNote(); props.close(); }} className="w3-button w3-red  fa fa-trash w3-xxlarge w3-round-large"></div>
+            
+            
             <br /><br />
         </div>
 

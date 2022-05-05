@@ -1,12 +1,12 @@
-import addTask from './image0.jpeg';
-import markComplete from './image1.jpeg';
-import editTask from './image2.jpeg';
-import {Navigate } from 'react-router-dom';
+import addTask from './imagePC0.jpg';
+import markComplete from './imagePC1.jpg';
+import editTask from './imagePC2.jpg';
+import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import React from 'react';
 
 
-const Tutorial = () => {
+const TutorialPC = () => {
 
 
 
@@ -15,7 +15,7 @@ const Tutorial = () => {
 
     const imageArray = [addTask, markComplete, editTask]
 
-    const instructions = ["Click pencil to add tasks", "Click task to mark it done", "Long press to edit or delete"];
+    const instructions = ["Click pencil to add tasks", "Click task to mark it done", "Right click to edit or delete"];
 
 
     const [imageState, setImageState] = useState(0);
@@ -23,17 +23,17 @@ const Tutorial = () => {
     let rightButton = true;
     let leftButton = false;
 
-   
+
     let x = imageState;
     if (x == 0) {
         rightButton = true;
-        
+
     }
     if (x == 1) {
         leftButton = true;
         rightButton = true;
 
-       
+
     }
     if (x == 2) {
         rightButton = false;
@@ -41,12 +41,12 @@ const Tutorial = () => {
     }
 
 
-    
+
 
     const goRight = () => {
         setImageState(prev => prev + 1);
 
-       
+
 
 
 
@@ -57,12 +57,12 @@ const Tutorial = () => {
 
 
 
-       
+
     }
 
     const skipTutorial = () => {
 
-        localStorage.setItem('tutorialViewPhone', 'true');
+        localStorage.setItem('tutorialViewPC', 'true');
 
         setCloseTutorial(true);
 
@@ -79,7 +79,7 @@ const Tutorial = () => {
 
     return (<div className="w3-container w3-black">
 
-        <div style={{ animationDuration: '2s', animationIterationCount: 'infinite' }} className="w3-xlarge heartbeat w3-text-red w3-black dancingFont w3-center w3-wide w3-margin">{instructions[imageState]} </div>
+        <div style={{animationDuration:'2s', animationIterationCount:'infinite'}} className="w3-xlarge heartbeat w3-text-red w3-black dancingFont w3-center w3-wide w3-margin">{instructions[imageState]} </div>
 
         <div className="w3-display-container">
 
@@ -88,14 +88,14 @@ const Tutorial = () => {
 
                 <img className="w3-image scale-in-center" src={imageArray[imageState]} />
 
-           
+
             </div>
-            {rightButton &&  <div onClick={goRight} className="w3-display-right fa fa-arrow-right  w3-center w3-blue w3-button w3-card-4 w3-xxlarge"></div>}
-            {leftButton &&  <div onClick={goLeft} className="w3-display-left fa fa-arrow-left  w3-center w3-blue w3-button w3-card-4 w3-xxlarge"></div>}
-            <div onClick={skipTutorial } className="w3-display-bottomleft fa fa-close  w3-center w3-round   w3-blue w3-button w3-card-4 w3-wide w3-xxlarge"> </div>
+            {rightButton && <div onClick={goRight} className="w3-display-right fa fa-arrow-right  w3-center w3-blue w3-button w3-card-4 w3-xxlarge"></div>}
+            {leftButton && <div onClick={goLeft} className="w3-display-left fa fa-arrow-left  w3-center w3-blue w3-button w3-card-4 w3-xxlarge"></div>}
+            <div onClick={skipTutorial} className="w3-display-bottomleft fa fa-close  w3-center w3-round   w3-blue w3-button w3-card-4 w3-wide w3-xxlarge"> </div>
 
 
-           
+
 
 
         </div>
@@ -105,4 +105,4 @@ const Tutorial = () => {
 }
 
 
-export default Tutorial;
+export default TutorialPC;

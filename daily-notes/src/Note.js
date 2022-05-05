@@ -55,11 +55,20 @@ const Note = (props) => {
     }
 
 
+
+    const onRightClick = (e) => {
+
+        e.preventDefault();
+        setLongPresseds(true);
+
+    }
+
+
     
 
     return (
         <>
-        <div {...bind()} onClick={taskStatusHandler} className="w3-container dancingFont w3-xlarge  scale-in-center  w3-large w3-border-bottom w3-margin " >
+            <div {...bind()} onContextMenu={ onRightClick } onClick={taskStatusHandler} className="w3-container dancingFont w3-xlarge  scale-in-center  w3-large w3-border-bottom w3-margin " >
 
             {!isComplete.status && <span className={isComplete.color}>  <span className="w3-wide fa fa-circle "> </span> {"  "}
                 {props.text}

@@ -1,11 +1,31 @@
 import React from 'react';
-import image from './bg.jpg';
+import bgPhone from './bg.jpg';
+import bgPC from './pcBG.jpg';
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginData } from './Store';
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
+import  useMediaQuery  from 'use-mediaquery';
 const Login = () => {
+
+    const isPC = useMediaQuery("(min-width:700px)");
+     let image;
+    let formWidth;
+    let tutorialPath;
+    let whichTutorial;
+
+    if (isPC) {
+        whichTutorial = "tutorialViewPC";
+        tutorialPath = "/tutorialPC";
+        image = bgPC;
+        formWidth = "50%";
+    } else if (!isPC) {
+        whichTutorial = "tutorialViewPhone";
+        tutorialPath = "/tutorialPhone ";
+        image = bgPhone;
+        formWidth = "90%";
+    }
 
     const [authStatus, updateAuthStatus] = useState(false);
 
@@ -110,7 +130,7 @@ const Login = () => {
 
             if (response.data.authorized === true) {
                 updateAuthStatus(true);
-            } else {
+            } else{
 
                 updateAuthStatus(false);
                
@@ -194,10 +214,10 @@ const Login = () => {
 
     if (authStatus) {
 
-        if (localStorage.getItem('tutorialView') == 'true') {
+        if (localStorage.getItem(whichTutorial) == 'true') {
             return <Navigate to="/home" />;
         } else {
-            return <Navigate to="/tutorial" />;
+            return <Navigate to={ tutorialPath} />;
         }
 
 
@@ -220,9 +240,15 @@ const Login = () => {
         {userCreated && <div className="w3-wide w3-text-green w3-center rotate-hor-center">Congratulations!<br/> You are Registered Now...<br/><br/>Try Logging In Now...</div>}
         <br /><br /><br />
 
-        <div style={{width:'90%', margin:'auto'}} className="w3-card-4 w3-round-xlarge w3-container">
+
+
+
+        <div style={{ width: formWidth, margin: 'auto' }} className="w3-card-4 w3-round-xlarge w3-container">
 
             <br />
+
+
+
             <div className="w3-display-container">
                 <input onKeyUp={validateUsername } ref={ usernameRef} type="text" style={{ width: '100%', margin: 'auto' }} className="w3-input w3-center w3-wide w3-black" placeholder="Enter UserName..."    />
                 <br />
